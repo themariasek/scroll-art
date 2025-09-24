@@ -1,38 +1,13 @@
 import java.util.Random;
 
 public class ScrollArtV1 {
-    // ANSI color codes
-    static final String RESET = "\u001B[0m";
-    static final String WHITE = "\u001B[37m";
-    static final String CYAN = "\u001B[36m";
-    static final String ORANGE = "\u001B[33m";
-    static final String GREEN = "\u001B[32m";
-    static final String BRIGHT_WHITE = "\u001B[97m";
-    static final String BRIGHT_ORANGE = "\u001B[93m";
-    
-    // Inner class to hold character and color information
-    static class ColoredChar {
-        char character;
-        String color;
-        
-        ColoredChar(char character, String color) {
-            this.character = character;
-            this.color = color;
-        }
-        
-        @Override
-        public String toString() {
-            return color + character + RESET;
-        }
-    }
-    
     static final int WIDTH = getTerminalWidth() - 1;
     static final int BUNNY_WIDTH = 8;
     static final int BUNNY_HEIGHT = 6;
     static final Random rand = new Random();
 
     public static void main(String[] args) throws InterruptedException {
-        ColoredChar[][] nextRows = new ColoredChar[BUNNY_HEIGHT][WIDTH]; // store upcoming rows
+        char[][] nextRows = new char[BUNNY_HEIGHT][WIDTH]; // store upcoming rows
         for (int i = 0; i < nextRows.length; i++) {
             nextRows[i] = emptyRow();
         }
@@ -40,7 +15,7 @@ public class ScrollArtV1 {
         while (true) {
             for (int x = 0; x < WIDTH - BUNNY_WIDTH; x++) {
                 if (rand.nextDouble() < 0.01) {
-                    ColoredChar[][] img;
+                    char[][] img;
                     if (rand.nextDouble() < 0.5)
                         img = getBunny();
                     else {
@@ -54,35 +29,27 @@ public class ScrollArtV1 {
                 }
             }
 
-            // Print and remove the top row with colors
-            printColoredRow(nextRows[0]);
+            // Print and remove the top row
+            System.out.println(new String(nextRows[0]));
             // Shift all rows up
             shiftRowsUp(nextRows);
             Thread.sleep(40); // Delay in ms
         }
     }
 
-    static void shiftRowsUp(ColoredChar[][] nextRows) {
+    static void shiftRowsUp(char[][] nextRows) {
         for (int i = 1; i < nextRows.length; i++) {
             nextRows[i - 1] = nextRows[i];
         }
         nextRows[nextRows.length - 1] = emptyRow();
     }
 
-    static ColoredChar[] emptyRow() {
-        ColoredChar[] row = new ColoredChar[WIDTH];
+    static char[] emptyRow() {
+        char[] row = new char[WIDTH];
         for (int i = 0; i < WIDTH; i++) {
-            row[i] = new ColoredChar(' ', WHITE);
+            row[i] = ' ';
         }
         return row;
-    }
-    
-    static void printColoredRow(ColoredChar[] row) {
-        StringBuilder sb = new StringBuilder();
-        for (ColoredChar coloredChar : row) {
-            sb.append(coloredChar.toString());
-        }
-        System.out.println(sb.toString());
     }
 
     // rename your function here
