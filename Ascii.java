@@ -26,7 +26,7 @@ class Ascii {
     }
 
     private static char[][] buildLlama() {
-        char[][] llama = new char[9][30];
+        char[][] llama = new char[9][19];
         for (int i = 0; i < llama.length; i++) {
             for (int j = 0; j < llama[i].length; j++) {
                 llama[i][j] = ' ';
