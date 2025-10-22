@@ -1,0 +1,5 @@
+For this project, I first started off with creating my still life, which was of a llama. For this still life, I was "Ultra Polite" and made my own ascii art and used it, which is 1 point. For the second art, I was also "Ultra Polite" by making and using my own art, which was also 1 point.
+
+After that I moved on to the animations. I started by building a 2D char array, filling it with spaces, and figuring out where to put each character so that it looked right. Then I wrote a loop that builds a canvas, picked a few random spots, copies the llama art into those spots without overlapping, and then prints the canvas and makes it seem like the llamas are constantly popping up. That code is in "Ascii.java".
+
+The second scroll program is for moving line symbols. In this one, there are many lines of different "thickness" that appear in front of or behind the other lines. Every frame can start another line or take off a line that went off the canvas, moves all the active ones left or right, and prints a single row of characters to the screen. That code is in "Symbols.java".
